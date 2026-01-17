@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimmoor Soundworks | Official Store</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
+    <style>
+        /* --- NIMMOOR SOUNDWORKS VISUAL THEME --- */
+        :root {
+            /* Cyber/Tech Color Palette */
+            --primary: #8a2be2; /* Electric Purple */
+            --secondary: #03dac6; /* Neon Teal (Accents) */
+            --bg: #0d0d0d; /* Deep Black/Grey */
+            --card-bg: #1a1a1a; /* Lighter Grey for cards */
+            --text: #ffffff;
+            --text-dim: #b0b0b0;
+        }
+        
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; }
+        
+        /* Navigation */
+        nav { display: flex; justify-content: space-between; padding: 20px 40px; background: rgba(0,0,0,0.9); align-items: center; border-bottom: 1px solid #333; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 3px; }
+        .logo span { color: var(--primary); } 
+        
+        .nav-links button { background: none; border: none; color: var(--text-dim); font-size: 1rem; margin-left: 30px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
+        .nav-links button:hover { color: var(--primary); }
+        
+        /* Sections */
+        .section { display: none; padding: 60px 20px; max-width: 1000px; margin: 0 auto; animation: fadeIn 0.6s ease-out; }
+        .active-section { display: block; }
+        
+        /* Hero (Home) */
+        .hero { text-align: center; padding: 80px 20px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.1; }
+        .hero p { color: var(--text-dim); margin-bottom: 40px; font-size: 1.2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        /* Forms */
+        .email-signup { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;}
+        input, select, textarea { padding: 15px; border-radius: 4px; border: 1px solid #333; background: #222; color: white; outline: none; transition: 0.2s; }
+        input:focus, select:focus, textarea:focus { border-color: var(--primary); }
+        
+        button.btn { padding: 15px 35px; border-radius: 4px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        button.btn:hover { background: #6d1bb3; box-shadow: 0 0 15px rgba(138, 43, 226, 0.4); }
+
+        /* Beat Store Grid */
+        .beat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+        .beat-card { background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid #333; transition: transform 0.2s; }
+        .beat-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
+        
+        .beat-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 5px; color: var(--text); }
+        .beat-meta { color: var(--secondary); font-size: 0.9rem; margin-bottom: 15px; display: flex; justify-content: space-between; font-family: monospace; }
+        
+        /* Audio Player Customization */
+        audio { width: 100%; margin-bottom: 15px; height: 35px; filter: invert(1); }
+        
+        /* Pagination */
+        .pagination { display: flex; justify-content: center; margin-top: 40px; gap: 15px; }
+        
+        /* Modal (Popup) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px); }
+        .modal-content { background: var(--card-bg); padding: 40px; border-radius: 8px; width: 90%; max-width: 500px; position: relative; border: 1px solid var(--primary); box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+        .close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 1.8rem; color: #666; transition: 0.2s;}
+        .close-btn:hover { color: white; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--text-dim); font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; box-sizing: border-box; font-size: 1rem; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Footer */
+        footer { text-align: center; padding: 50px; color: #444; font-size: 0.9rem; border-top: 1px solid #1a1a1a; margin-top: 80px; }
+        .socials { margin-bottom: 20px; }
+        .socials a { color: var(--text-dim); text-decoration: none; margin: 0 15px; transition: 0.2s; font-size: 1rem; }
+        .socials a:hover { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">NIMMOOR <span>SOUNDWORKS</span></div>
+        <div class="nav-links">
+            <button onclick="showSection('home')">Home</button>
+            <button onclick="showSection('store')">Catalog</button>
+        </div>
+    </nav>
+
+    <div id="home" class="section active-section">
+        <div class="hero">
+            <h1>Soundscapes for the Late Night</h1>
+            <p>Dark, cinematic, and driving beats for artists who want to stand out.</p>
+            
+            <form action="https://formspree.io/f/xvzzzdqn" method="POST" class="email-signup">
+                <input type="email" name="email" placeholder="Enter your email address" required style="width: 300px;">
+                <button type="submit" class="btn">Get Free Coupon</button>
+            </form>
+            <p style="font-size: 0.85rem; margin-top: 15px; color: #666;">Sign up to get a free "For-Profit" use coupon code and monthly beat drops.</p>
+        </div>
+    </div>
+
+    <div id="store" class="section">
+        <h2 style="border-bottom: 1px solid #333; padding-bottom: 10px;">Catalog</h2>
+        <p style="color: var(--text-dim); margin-bottom: 30px;">
+            Browse the catalog below. All tracks are available for <strong>Standard Lease ($30)</strong> or <strong>Exclusive Rights ($150)</strong>. Click "Buy / Offer" to inquire.
+        </p>
+        
+        <div class="beat-grid" id="beatContainer">
+            </div>
+        
+        <div class="pagination">
+            <button class="btn" onclick="changePage(-1)" style="padding: 10px 20px;">Prev</button>
+            <span id="pageIndicator" style="align-self: center; font-family: monospace;">Page 1</span>
+            <button class="btn" onclick="changePage(1)" style="padding: 10px 20px;">Next</button>
+        </div>
+    </div>
+
+    <div id="buyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 style="margin-top:0;">Purchase Request</h3>
+            <p style="font-size: 0.9rem; color:var(--text-dim); margin-bottom: 25px;">
+                I will review your request and email you the payment link and files.
+            </p>
+            
+            <form action="https://formspree.io/f/xvzzzdqn" method="POST">
+                
+                <div class="form-group">
+                    <label>Selected Beat</label>
+                    <input type="text" id="modalBeatName" name="beat_name" readonly style="background:#111; border-color: #333; color: var(--secondary);">
+                </div>
+                
+                <div class="form-group">
+                    <label>Your Email Address</label>
+                    <input type="email" name="customer_email" placeholder="Where should I send the files?" required>
+                </div>
+
+                <div class="form-group">
+                    <label>License Type</label>
+                    <select name="license_type" id="licenseSelect" onchange="toggleOfferField()">
+                        <option value="Standard - $30">Standard Lease ($30) - MP3/WAV, Non-Profit</option>
+                        <option value="Exclusive - $150">Exclusive Rights ($150) - Full Ownership</option>
+                        <option value="Best Offer">Make an Offer (OBO)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="offerField" style="display:none;">
+                    <label>Your Offer Amount ($)</label>
+                    <input type="number" name="offer_amount" placeholder="e.g. 100">
+                </div>
+
+                <div class="form-group">
+                    <label>Message (Optional)</label>
+                    <textarea name="message" rows="3" placeholder="Any specific requirements?"></textarea>
+                </div>
+
+                <button type="submit" class="btn" style="width:100%">Send Request</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="socials">
+            <a href="https://youtube.com/@zensperspective?si=gMTsO502wnUeidNc" target="_blank">YouTube</a>
+            <a href="mailto:z3npenske@gmail.com">Email Me</a>
+        </div>
+        <p>&copy; 2026 Nimmoor Soundworks. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // --- MASTER BEAT LIST ---
+        const beats = [
+            { title: "Freestyle", bpm: 90, key: "C Maj", audio: "music/freestyle.mp3" },
+            { title: "January 28th", bpm: 100, key: "C# Min", audio: "music/January 28th.mp3" },
+            { title: "Poppin Off", bpm: 102, key: "C Maj", audio: "music/poppin off.mp3" },
+            { title: "Miller Nite", bpm: 125, key: "C Maj", audio: "music/miller nite.mp3" },
+            { title: "Sauced", bpm: 120, key: "C Maj", audio: "music/sauced.mp3" },
+            { title: "Baby", bpm: 87, key: "C Maj", audio: "music/Baby.mp3" },
+            { title: "2AM", bpm: 120, key: "C Maj", audio: "music/2am.mp3" },
+            { title: "Just Fine", bpm: 152, key: "B Min", audio: "music/just fine.mp3" },
+            { title: "Loyal", bpm: 146, key: "C Maj", audio: "music/loyal.mp3" },
+        ];
+
+        const itemsPerPage = 6;
+        let currentPage = 1;
+
+        // --- SYSTEM FUNCTIONS ---
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active-section'));
+            document.getElementById(id).classList.add('active-section');
+            window.scrollTo(0,0);
+        }
+
+        function renderBeats() {
+            const container = document.getElementById('beatContainer');
+            container.innerHTML = '';
+            
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedBeats = beats.slice(start, end);
+
+            paginatedBeats.forEach(beat => {
+                const card = document.createElement('div');
+                card.className = 'beat-card';
+                card.innerHTML = `
+                    <div class="beat-title">${beat.title}</div>
+                    <div class="beat-meta"><span>${beat.bpm} BPM</span><span>${beat.key}</span></div>
+                    <audio controls controlsList="nodownload" src="${beat.audio}"></audio>
+                    <button class="btn" style="width:100%; margin-top:10px; font-size:0.9rem;" onclick="openModal('${beat.title}')">Buy / Offer</button>
+                `;
+                container.appendChild(card);
+            });
+
+            document.getElementById('pageIndicator').innerText = `Page ${currentPage}`;
+        }
+
+        function changePage(direction) {
+            const totalPages = Math.ceil(beats.length / itemsPerPage);
+            if (currentPage + direction > 0 && currentPage + direction <= totalPages) {
+                currentPage += direction;
+                renderBeats();
+            }
+        }
+
+        function openModal(beatTitle) {
+            document.getElementById('buyModal').style.display = 'flex';
+            document.getElementById('modalBeatName').value = beatTitle;
+        }
+
+        function closeModal() {
+            document.getElementById('buyModal').style.display = 'none';
+        }
+
+        function toggleOfferField() {
+            const select = document.getElementById('licenseSelect');
+            const offerDiv = document.getElementById('offerField');
+            if(select.value === 'Best Offer') {
+                offerDiv.style.display = 'block';
+            } else {
+                offerDiv.style.display = 'none';
+            }
+        }
+
+        // Initialize Store
+        renderBeats();
+        
+        // Close modal if clicking outside content
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('buyModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
